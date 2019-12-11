@@ -1,0 +1,23 @@
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        //判断strs数组是否为空数组（其实应该还应该判断是否为null数组）
+        if (strs.length == 0) {
+            return "";
+        }
+        //分析：最长公共前缀属于strs数组中任意一个字符串的子串，这里提取第一个字符串（方便写for循环）
+        String str = strs[0];
+        //遍历strs数组中的所有字符串
+        for (int i = 1;i < strs.length;i ++) {
+            //判断str是否属于strs数组中其余字符串的子串，且索引值必须为0
+            while (strs[i].indexOf(str) != 0) {
+                //str不是strs数组中其余字符串的子串的话，就将str尾部去除
+                str = str.substring(0,str.length() - 1);
+                //str变成了""，就直接说明strs数组中不存在公共子串，直接返回""
+                if (str.length() == 0) {
+                    return "";
+                }
+            }
+        }
+        return str;
+    }
+}
