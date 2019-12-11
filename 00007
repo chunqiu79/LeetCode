@@ -1,0 +1,22 @@
+class Solution {
+    public int reverse(int x) {
+        //定义一个rx表示反转的x的值
+        int rx = 0;
+        //while(x!=0)相当于判断x有多少位（当然10的倍数除外） 
+        while (x != 0) {
+            //将x的最后一位取出
+            int r = x % 10;
+            //用一个临时变量temp用来保存rx的值，因为rx可能溢出
+            int temp = rx;
+            //将x的最后一位变成了最高位，从而实现反转
+            rx = 10 * rx + r;
+            //将上面的式子反转，可以判断是否溢出，溢出就不相等
+            if ((rx - r) / 10 != temp) {
+                return 0;
+            }
+            //循环一次将x的变小十倍，将最后一位去掉
+            x /= 10; 
+        }
+        return rx;
+    }
+}
