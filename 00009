@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        //首先排除负数，以及不等于0的10的倍数
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+        //用一个临时变量tx来保存x的值
+        int tx = x;
+        //用一个变量rx保存x反转之后的数
+        int rx = 0;
+        //while(x!=0)相等于判断x有多少位（0除外）
+        while (x != 0) {
+            //变量r用来保存每次x的最后一位
+            int r = x % 10;
+            //用一个临时变量temp保存rx，用来判断是否溢出
+            int temp = rx;
+            //将x的最后一位逐步变成最高位，达到反转x的目的
+            rx = 10 * rx + r;
+            //rx=10*rx+r这个式子是否能反转，如果不能表明rx会溢出
+            if ((rx - r) / 10 != temp) {
+                return false;
+            }
+            //每循环一次就将x除以10，达到去除最后一位数的目的
+            x /= 10;
+        }
+        //判断初始x和反转后的x是否相等，及是否为回文数
+        return tx == rx;
+    }
+}
