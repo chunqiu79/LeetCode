@@ -1,0 +1,29 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        //判断nums是否为null或者nums的长度是否为0
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        //变量len获取nums的长度
+        int len = nums.length;
+        //分析：采用双指针
+        //定义一个慢指针（慢索引）
+        int low = 0;
+        //定义一个快指针（快索引）
+        int fast = 0;
+        //fast指针最大为len-1
+        while (fast < len) {
+            //判断low指针和fast指针指的值是否一样
+            if (nums[low] != nums[fast]) {
+                //将fast指针指的值复制给low指针所指的后面一个元素（也就是fast指针所指的值第一次出现的地方）
+                nums[low + 1] = nums[fast]; 
+                //将low指针向后移一位
+                low ++;
+            }
+            //无论如果fast指针都要向后移动一位
+            fast ++;
+        }
+        //返回low+1（因为low是从0开始）
+        return low + 1;
+    }
+}
