@@ -1,0 +1,27 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        //判断nums是否为null或nums的长度是否为0
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        //变量len获取nums的长度
+        int len = nums.length;
+        //定义count变量来获取有nums数组中有多少个数和val相等
+        int count = 0;
+        //只需要遍历nums数组的前（len-count）位就行
+        for (int i = 0;i < len - count;i ++) {
+            //判断nums第i位是否于val相等
+            if (nums[i] == val) {
+                //nums数组中和val相等的数增加一位
+                count ++;
+                //将第i位之后的数每个数都往前移动一位，且最后一个移动的数是数组中第（len-count）位数
+                for (int j = i;j < len - count;j ++) {
+                    nums[j] = nums[j + 1];
+                }
+                //因为原始第i位上的数变化了，所以i--是为了i++抵消，从而达到i不变
+                i --;
+            }
+        }
+        return len - count;
+    }
+}
